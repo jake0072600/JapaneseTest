@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta http-equiv="x-ua-compatible" content="IE=edge" />
+    <title></title>
+    <style>
+        /* line 5, C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+        html, body, div, span, applet, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, details, embed,
+        figure, figcaption, footer, header, hgroup,
+        menu, nav, output, ruby, section, summary,
+        time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font: inherit;
+            font-size: 100%;
+            vertical-align: baseline;
+        }
+
+        /* line 22, C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+        html {
+            line-height: 1;
+        }
+
+        /* line 24, C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+        ol, ul {
+            list-style: none;
+        }
+
+        /* line 26, C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        /* line 28, C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+        caption, th, td {
+            text-align: left;
+            font-weight: normal;
+            vertical-align: middle;
+        }
+
+        /* line 30, C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+        q, blockquote {
+            quotes: none;
+        }
+        /* line 103, C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+        q:before, q:after, blockquote:before, blockquote:after {
+            content: "";
+            content: none;
+        }
+
+        /* line 32, C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+        a img {
+            border: none;
+        }
+
+        /* line 116, C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+        article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+            display: block;
+        }
+
+        html,body{
+            height:100%;
+            overflow: hidden;
+        }
+        .slide{
+            position: relative;
+        }
+        .slide p{
+            text-align: center;
+        }
+        #words{
+            text-align: center;
+        }
+        .word{
+            width: 182px;
+            height: 202px;
+            border: 4px solid #eee;
+            border-radius: 10px;
+            color:#000;
+            display: inline-block;
+            margin-left:4px;
+            background-color: #fff;
+        }
+        .word p{
+            min-height: 16px;
+            width: 100%;
+        }
+        .word-select{
+            border:4px solid skyblue;
+        }
+        .word-okey{
+            border:4px solid skyblue;
+            background-color:skyblue;
+        }
+        .first-text{
+            margin-top:64px;
+        }
+        .bold{
+            font-weight: bold
+        }
+        #spell{
+            position: absolute;
+            width: 950px;
+            height: 30px;
+            line-height: 30px;
+            left: 50%;
+            margin-left: -475px;
+            bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid skyblue;
+            font-size: 20px;
+        }
+        #close{
+            position: absolute;
+            top:25px;
+            right: 25px;
+            width: 50px;
+            height: 50px;
+            color:#000;
+            cursor: pointer;
+            line-height: 50px;
+            text-align: center;
+            font-size: 40px;
+            font-family: SimHei;
+        }
+        .button1{
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            background-color: skyblue;
+            color:#fff;
+            font-size: 40px;
+
+            cursor: pointer;
+
+            user-select: none;
+        }
+        .ripple-obj {
+            height: 100%;
+            pointer-events: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            width: 100%;
+            fill: #AD1457;
+        }
+        #prev-page{
+            top:50%;
+            margin-top: -50px;
+            left:25px;
+        }
+        #next-page{
+            top:50%;
+            margin-top: -50px;
+            right:25px;
+        }
+        .page-controls{
+            position: absolute;
+            width: 950px;
+            height: 30px;
+            left: 50%;
+            top:50%;
+            margin-left: -475px;
+            margin-top: -130px;
+
+            text-align: center;
+        }
+
+        .hide{
+            opacity: 0;
+        }
+        .show{
+
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="./css/jquery.fullPage.css" />
+    <script src="./js/jquery-2.1.3.min.js"></script>
+    <script src="./js/jquery.fullPage.min.js"></script>
+    <script src="./js/TweenMax.min.js"></script>
+    <script src="./js/ripple-config.js"></script>
+    <script src="./js/snabbt.min.js"></script>
+</head>
+<body>
+    <div id="story">
+        <div class="section">
+            <div class="slide">
+                <p><select id="lessons"></select><button id="lessons-ok">确定</button></p>
+            </div>
+            <div class="slide" style="background-color: #eee">
+                <div id="close">&Chi;</div>
+                <div id="words">
+                </div>
+                <input id="spell">
+                <div class="button1" id="prev-page">&lt;
+                    <svg class="ripple-obj">
+                        <use id="js-ripple-prev" height="100" width="100" xlink:href="#ripply-scott" class="js-ripple"></use>
+                    </svg>
+                </div>
+                <div class="button1" id="next-page">&gt;
+                    <svg class="ripple-obj">
+                        <use id="js-ripple-next" height="100" width="100" xlink:href="#ripply-scott" class="js-ripple"></use>
+                    </svg>
+                </div>
+                <div class="page-controls">
+                    <input id="page-control-lock" type="checkbox">锁定当前页
+                    <input id="page-control-test" type="checkbox">测试
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="height: 0; width: 0; position: absolute; visibility: hidden;" aria-hidden="true">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" focusable="false">
+            <!-- Because of Firefox. -->
+            <defs>
+                <radialGradient id="gradient">
+                    <stop offset="0" stop-color="#0868BB" />
+                    <stop offset="0.25" stop-color="#0075D8" />
+                    <stop offset="0.35" stop-color="#0868BB" />
+                    <stop offset="0.50" stop-color="#0075D8" />
+                    <stop offset="0.60" stop-color="#0868BB" />
+                    <stop offset="0.85" stop-color="#0075D8" />
+                    <stop offset="1" stop-color="#0868BB" />
+                </radialGradient>
+            </defs>
+            <symbol id="ripply-scott" viewBox="0 0 100 100">
+                <circle id="ripple-shape" fill="url(#gradient)" cx="1" cy="1" r="1" />
+            </symbol>
+        </svg>
+    </div>
+
+    <script>
+
+        var voices=null;
+
+        if ('speechSynthesis' in window) {
+            // First call to getVoices may be null...later an event indicates when it is loaded
+            voices = window.speechSynthesis.getVoices();
+
+            // Save voices when loaded after first call
+            window.speechSynthesis.onvoiceschanged = function () {
+                voices = window.speechSynthesis.getVoices();
+                //readIt("はい");
+            };
+        }
+
+        var $close = $("#close");
+        var $spell = $("#spell");
+        var $words = $("#words");
+        var $lessons = $("#lessons");
+        var $lessonsOK = $("#lessons-ok");
+        var $prevPage = $("#prev-page");
+        var $nextPage = $("#next-page");
+        var $pageControlLock = $("#page-control-lock");
+        var $pageControlTest = $("#page-control-test");
+
+        var lessons=[
+            {src:"./lesson/lesson1-words.json",text:"第一课"},
+            {src:"./lesson/lesson2-words.json",text:"第二课"},
+            {src:"./lesson/lesson5-words.json",text:"第五课"},
+            {src:"./lesson/lesson6-words.json",text:"第六课"},
+            {src:"./lesson/lesson7-words.json",text:"第七课"}
+        ];
+
+        var nowLesson;
+        var nowCow=0;
+        var maxCow=5;
+        var lastCow=0;
+        var nowWord;
+
+        init();
+
+        function init(){
+            initFullPage();
+            initLessons();
+            initSomeEvents();
+        }
+
+        function initFullPage(){
+            $("#story").fullpage({controlArrows:false});
+        }
+
+        function initLessons(){
+            $lessons.empty();
+
+            var domStr="";
+            lessons.map(function(l){
+                domStr+="<option value='"+ l.src+"'>"+ l.text+"</option>"
+            })
+            $(domStr).appendTo($lessons);
+        }
+
+        function initSomeEvents(){
+            $lessonsOK.on("click",function(){
+                var ls=$lessons.val();
+                if(ls)
+                    $.get(ls).done(function(data){
+                        nowLesson=data;
+                        $.fn.fullpage.silentMoveTo(0,1);
+                        $spell.focus();
+                        initWords();
+                    })
+            });
+
+            $spell.on("keydown",function(event){
+                if(event.key==="Enter"){
+                    var text=$.trim($spell.val());
+                    if(text===nowWord.text||text===nowWord.kanji){
+                        readIt(nowWord.kanji);
+                        nextWord();
+                        $spell.val("");
+                    }
+                }
+            });
+
+            $close.on("click",function(){
+                $.fn.fullpage.silentMoveTo(0,0);
+                clearWords();
+            });
+
+            $prevPage.on("click",function(){
+                prevPage();
+            })
+            $nextPage.on("click",function(){
+                nextPage();
+            });
+
+            $pageControlTest.change(function(){
+                toggleFirstText();
+            })
+
+
+
+            ripplyScott.init('prev-page',"js-ripple-prev",1.75);
+            ripplyScott.init('next-page',"js-ripple-next",1.75);
+        }
+
+        function initWords(){
+            if(!nowLesson) return;
+
+            $words.empty();
+            var domStr="";
+            lastCow=nowCow+maxCow>=nowLesson.length?nowLesson.length:nowCow+maxCow;
+            for(var i=nowCow;i<lastCow;i++){
+                var isSelect=i===nowCow?" word-select":"";
+                domStr+="<div class='word"+isSelect+"' data-index="+i+"><p class='first-text'>"+nowLesson[i].text+"</p><p class='bold'>"+nowLesson[i].kanji+"</p><p>"+nowLesson[i].chinese+"</p><p class='bold'>["+nowLesson[i].type+"]</p></div>"
+            }
+            $(domStr).appendTo($words);
+
+            nowWord = nowLesson[nowCow];
+
+            toggleFirstText();
+            //getNowWords(nowCow)
+        }
+
+        function getNowWords(cow){
+            nowWord = nowLesson[cow];
+
+/*            $(".word").each(function(){
+                var $this=$(this);
+                if(cow==$this.data("index"))
+                    $this.addClass("word-select");
+            })*/
+        }
+        function nextWord(){
+            var $ws = $(".word-select");
+            var $wsn = $ws.next();
+
+            if($wsn.length){
+                $ws.addClass("word-okey").removeClass("word-select");
+                $wsn.addClass("word-select");
+                nowWord=nowLesson[parseInt($wsn.data("index"))];
+            }else
+                nextPage();
+
+        }
+        function nextPage(){
+            var isLocked=$pageControlLock.get(0).checked;
+
+            if(!isLocked)
+                nowCow=(nowCow+maxCow>=nowLesson.length)?0:(nowCow+maxCow);
+
+            initWords();
+        }
+        function prevPage(){
+            var isLocked=$pageControlLock.get(0).checked;
+
+            if(!isLocked)
+                nowCow=(nowCow-maxCow>=0)?(nowCow-maxCow):Math.floor(nowLesson.length/maxCow)*maxCow;
+
+            initWords();
+        }
+        function readIt(text){
+            if(voices!==null){
+                var msg = new SpeechSynthesisUtterance(text);
+                msg.lang='ja';
+                msg.voice = speechSynthesis.getVoices().filter(function(voice) { return voice.name == 'Google 日本語'; })[0];
+                speechSynthesis.speak(msg);
+            }
+        }
+
+        function toggleFirstText(){
+            if($pageControlTest.get(0).checked)
+                hideFirstTest();
+            else
+                showFirstTest();
+        }
+        function hideFirstTest(){
+            $(".first-text").addClass("hide");
+        }
+        function showFirstTest(){
+            $(".first-text").removeClass("hide");
+        }
+
+        function clearWords(){
+            nowCow=0;
+            $pageControlLock.get(0).checked=false;
+            $pageControlTest.get(0).checked=false;
+        }
+
+    </script>
+</body>
+</html>

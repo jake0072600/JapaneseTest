@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta http-equiv="x-ua-compatible" content="IE=edge" />
+    <style>
+        /* line 5, C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+        html, body, div, span, applet, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, details, embed,
+        figure, figcaption, footer, header, hgroup,
+        menu, nav, output, ruby, section, summary,
+        time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font: inherit;
+            font-size: 100%;
+            vertical-align: baseline;
+        }
+
+        /* line 22, C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+        html {
+            line-height: 1;
+        }
+
+        /* line 24, C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+        ol, ul {
+            list-style: none;
+        }
+
+        /* line 26, C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        /* line 28, C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+        caption, th, td {
+            text-align: left;
+            font-weight: normal;
+            vertical-align: middle;
+        }
+
+        /* line 30, C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+        q, blockquote {
+            quotes: none;
+        }
+        /* line 103, C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+        q:before, q:after, blockquote:before, blockquote:after {
+            content: "";
+            content: none;
+        }
+
+        /* line 32, C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+        a img {
+            border: none;
+        }
+
+        /* line 116, C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+        article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+            display: block;
+        }
+
+        body,html{
+            height:100%;
+            width:100%;
+            overflow: hidden;
+        }
+        #stage{
+            position: absolute;
+            width:100%;
+            height: 100%;
+            left:0;
+            top:0;
+        }
+        #options{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left:0;
+            top:0;
+            background-color:rgba(0,0,0,0.8);
+            display: none;
+        }
+        .options-plan{
+            position: absolute;
+            width: 160px;
+            height: 60px;
+            left: 50%;
+            top: 50%;
+            margin-left: -80px;
+            margin-top: -30px;
+            line-height: 30px;
+            color: #fff;
+        }
+        #options-clear{
+            float: right;
+            margin-top: 6px;
+        }
+        #texts{
+            width: 120px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="stage"></canvas>
+    <div id="options">
+        <div class="options-plan">
+            <ul>
+                <li>
+                    内容
+                    <select id="texts">
+                        <option data-type="pingText" data-min="0" data-max="45" value="pText">平假名</option>
+                        <option data-type="pingText" data-min="0" data-max="25" value="pTextUp">平假名前五行</option>
+                        <option data-type="pingText" data-min="26" data-max="45" value="pTextDown">平假名后五行</option>
+                        <option data-type="pianText" data-min="0" data-max="45" value="pianText">片假名</option>
+                        <option data-type="pianText" data-min="0" data-max="25" value="pianTextUp">片假名前五行</option>
+                        <option data-type="pianText" data-min="26" data-max="45" value="pianTextDown">片假名后五行</option>
+                        <option data-type="pingText" data-min="0" data-max="70" value="pText">平假名（带浊音）</option>
+                        <option data-type="pianText" data-min="0" data-max="70" value="pText">片假名（带浊音）</option>
+                        <option data-type="pingText" data-min="71" data-max="103" value="pText">袄……音（平假名）</option>
+                        <option data-type="pianText" data-min="71" data-max="103" value="pText">袄……音（片假名）</option>
+                    </select>
+                </li>
+                <li>练习模式（显示罗马音）:<input id="need-roman" type="checkbox" /></li>
+                <li>
+                    <button id="options-okey">确定</button>
+                    <button id="options-clear">取消</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script src="./js/jquery-2.1.3.min.js"></script>
+    <script src="./js/howler.min.js"></script>
+    <script src="./js/pixi443.js"></script>
+    <script src="./js/required/plugins/pixi-spine.js"></script>
+    <script src="./js/TweenLite.js"></script>
+    <script src="./js/view.js"></script>
+    <!--<script src="./js/justDoIt.min.js"></script>-->
+</body>
+</html>

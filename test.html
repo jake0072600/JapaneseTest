@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <input id="speak" type="text">
+    <script src="js/jquery-2.1.3.min.js"></script>
+    <script>
+        var $speak=$("#speak");
+
+        var SpeechRecognition = window.SpeechRecognition ||
+                window.webkitSpeechRecognition ||
+                window.mozSpeechRecognition ||
+                window.oSpeechRecognition ||
+                window.msSpeechRecognition;
+
+        if (SpeechRecognition) {
+            var recognition = new SpeechRecognition();
+            recognition.maxAlternatives = 5;
+            recognition.continuous = false;
+            recognition.lang = 'cmn-Hans-CN';
+            recognition.interimResults = true;
+
+            recognition.onaudiostart = function() {
+                $speak.val("Speak now...");
+            };
+
+            recognition.onnomatch = function() {
+                $speak.val("Try again please...");
+            };
+
+            recognition.onerror = function(event) {
+                $speak.val("Error. Try Again...");
+            };
+
+            recognition.onresult = function(event) {
+
+                console.log(event);
+                if (event.results.length > 0) {
+                    var result = event.results[event.results.length - 1];
+
+                    $speak.val(result[result.length - 1 ].transcript);
+                }
+            };
+        }
+
+    </script>
+</body>
+</html>

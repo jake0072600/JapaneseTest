@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        canvas{
+            height: 900px;
+            width: 1000px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="line"></canvas>
+    <script type="text/javascript" src="./js/jquery-2.1.3.min.js"></script>
+    <script>
+        var domLine=document.getElementById("line");
+        var lineCtx=domLine.getContext("2d");
+
+        var level=1;
+        var value=1;
+        var maxLevel=1000;
+        var maxValue=900;
+
+        var lastLevel=0;
+        var lastValue=0;
+
+        for(;level<maxLevel;level++){
+            value=Math.floor(0.5*level+5);
+
+            drawLine();
+        }
+
+        function drawLine(){
+            lineCtx.moveTo(lastLevel,lastValue);
+            lineCtx.lineTo(level,value);
+            lineCtx.stroke();
+
+            lastLevel=level;
+            lastValue=value;
+
+            console.log(lastLevel,lastValue);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+﻿[
+  {"text":"にちようび","kanji":"日曜日","chinese":"星期日","type":"名"},
+  {"text":"げつようび","kanji":"月曜日","chinese":"星期一","type":"名"},
+  {"text":"かようび","kanji":"火曜日","chinese":"星期二","type":"名"},
+  {"text":"すいようび","kanji":"水曜日","chinese":"星期三","type":"名"},
+  {"text":"もくようび","kanji":"木曜日","chinese":"星期四","type":"名"},
+  {"text":"きんようび","kanji":"金曜日","chinese":"星期五","type":"名"},
+  {"text":"どようび","kanji":"土曜日","chinese":"星期六","type":"名"}
+]
